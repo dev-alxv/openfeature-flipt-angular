@@ -1,0 +1,11 @@
+<div class="context-switcher-container">
+  <label>Client context</label>
+  &nbsp;
+  <select [(ngModel)]="selected" (change)="onChange()">
+    <option value="" disabled>Select a client</option>
+    <option *ngFor="let u of users" [value]="u.id">{{u.label}}</option>
+  </select>
+  <div style="margin-top: 1rem; font-size: 0.85rem; color: #999;">
+    Current ID: <strong>{{selected}}</strong>
+  </div>
+</div>

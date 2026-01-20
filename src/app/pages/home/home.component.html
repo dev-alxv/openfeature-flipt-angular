@@ -1,0 +1,252 @@
+<div class="dashboard-home">
+  <!-- No User Selected -->
+  <div class="welcome-state" style="margin-bottom: 30px;">
+    <div class="welcome-icon">👤</div>
+    <h2>{{ 'Welcome to' + (!showNewHomeUI ? ' the Old Dashboard' : ' your New Dashboard')}}</h2>
+    <!-- <p>Please select a user from the dropdown above to view your dashboard.</p> -->
+
+    <!-- some table rendering here for old dashboard -->
+    <div class="table-card old-dashboard-table" *ngIf="!showNewHomeUI">
+        <div class="table-header">
+            <h3>📋 Old Dashboard Features</h3>
+        </div>  
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Feature A</td>
+                    <td>This is a description of Feature A.</td>
+                    <td><span class="status-badge active">{{ oldFeatureA ? 'Active' : 'Inactive' }}</span></td>
+                </tr>
+                <tr>
+                    <td>Feature B</td>
+                    <td>This is a description of Feature B.</td>
+                    <td><span class="status-badge inactive">{{ oldFeatureB ? 'Active' : 'Inactive' }}</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <br>
+  </div>
+
+  <!-- Dashboard Content -->
+  <div *ngIf="showNewHomeUI" class="dashboard-grid">
+    <!-- Top Stats Cards -->
+    <div class="stats-row" *ngIf="false">
+      <div class="stat-card earning">
+        <div class="stat-header">
+          <span>Earning</span>
+          <svg class="stat-icon-sm" viewBox="0 0 24 24" fill="currentColor">
+            <circle cx="12" cy="12" r="10"></circle>
+            <text x="12" y="16" text-anchor="middle" font-size="12" fill="white">$</text>
+          </svg>
+        </div>
+        <div class="stat-value">$ {{ stats.earning }}</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-header">
+          <span>Share</span>
+          <svg class="stat-icon-sm share" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="18" cy="5" r="3"></circle>
+            <circle cx="6" cy="12" r="3"></circle>
+            <circle cx="18" cy="19" r="3"></circle>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+          </svg>
+        </div>
+        <div class="stat-value">{{ stats.share }}</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-header">
+          <span>Likes</span>
+          <svg class="stat-icon-sm likes" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+          </svg>
+        </div>
+        <div class="stat-value">{{ stats.likes }}</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-header">
+          <span>Rating</span>
+          <svg class="stat-icon-sm rating" viewBox="0 0 24 24" fill="currentColor">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+          </svg>
+        </div>
+        <div class="stat-value">{{ stats.rating }}</div>
+      </div>
+    </div>
+
+    <!-- Feature Flag Indicator -->
+    <div class="flag-display" *ngIf="false">
+      <div class="new-feature-alert">
+        <span class="pulse-dot"></span>
+        <strong>New Feature Active!</strong>
+      </div>
+      <app-flag-indicator flag='newHomeUI'></app-flag-indicator>
+    </div>
+
+    <!-- Premium/Enterprise Badges -->
+    <div class="user-badges" *ngIf="currentUser && false">
+      <span class="user-badge premium" *ngIf="isPremiumUser()">⭐ PREMIUM USER</span>
+      <span class="user-badge enterprise" *ngIf="isEnterpriseUser()">🏢 ENTERPRISE</span>
+    </div>
+
+    <!-- Transactions Table -->
+    <div class="table-card" *ngIf="transactions.length > 0">
+      <div class="table-header">
+        <h3>💳 Recent Transactions</h3>
+        <span class="table-count">{{ transactions.length }} records</span>
+      </div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Transaction ID</th>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let txn of transactions">
+            <td><code>{{ txn.id }}</code></td>
+            <td>{{ txn.date }}</td>
+            <td>{{ txn.description }}</td>
+            <td class="amount">${{ txn.amount.toFixed(2) }}</td>
+            <td>
+              <span class="status-badge" [ngClass]="txn.status">{{ txn.status }}</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Revenue Chart -->
+    <div class="chart-card revenue-chart" *ngIf="revenueChartData.length > 0 && newRevenueChartData">
+      <div class="chart-header">
+        <h3>📈 Quarterly Revenue</h3>
+        <div class="chart-legend">
+          <span class="legend-item"><span class="legend-dot" style="background: #1e3a5f;"></span> Revenue</span>
+          <span class="legend-item"><span class="legend-dot" style="background: #ff9f43;"></span> Target</span>
+        </div>
+      </div>
+      <div class="line-chart">
+        <svg viewBox="0 0 400 200" class="line-chart-svg">
+          <defs>
+            <linearGradient id="revGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color:#1e3a5f;stop-opacity:0.3" />
+              <stop offset="100%" style="stop-color:#1e3a5f;stop-opacity:0.05" />
+            </linearGradient>
+          </defs>
+          <!-- Grid lines -->
+          <line x1="0" y1="50" x2="400" y2="50" stroke="#e0e0e0" stroke-width="1"/>
+          <line x1="0" y1="100" x2="400" y2="100" stroke="#e0e0e0" stroke-width="1"/>
+          <line x1="0" y1="150" x2="400" y2="150" stroke="#e0e0e0" stroke-width="1"/>
+          <!-- Revenue line -->
+          <path [attr.d]="'M 50,' + (200 - revenueChartData[0].revenue * 2) + 
+                   ' L 150,' + (200 - revenueChartData[1].revenue * 2) + 
+                   ' L 250,' + (200 - revenueChartData[2].revenue * 2) + 
+                   ' L 350,' + (200 - revenueChartData[3].revenue * 2)" 
+                stroke="#1e3a5f" stroke-width="3" fill="none"/>
+          <!-- Target line -->
+          <path [attr.d]="'M 50,' + (200 - revenueChartData[0].target * 2) + 
+                   ' L 150,' + (200 - revenueChartData[1].target * 2) + 
+                   ' L 250,' + (200 - revenueChartData[2].target * 2) + 
+                   ' L 350,' + (200 - revenueChartData[3].target * 2)" 
+                stroke="#ff9f43" stroke-width="2" stroke-dasharray="5,5" fill="none"/>
+          <!-- Data points -->
+          <circle *ngFor="let data of revenueChartData; let i = index" 
+                  [attr.cx]="50 + i * 100" 
+                  [attr.cy]="200 - data.revenue * 2" 
+                  r="5" fill="#1e3a5f"/>
+        </svg>
+        <div class="chart-labels">
+          <span *ngFor="let data of revenueChartData">{{ data.quarter }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Team Performance Table -->
+    <div class="table-card team-table-card" *ngIf="teamMembers.length > 0">
+      <div class="table-header">
+        <h3>👥 Team Performance</h3>
+        <span class="table-count">{{ teamMembers.length }} members</span>
+      </div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Department</th>
+            <th>Performance</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let member of teamMembers">
+            <td><strong>{{ member.name }}</strong></td>
+            <td>{{ member.role }}</td>
+            <td><span class="dept-badge">{{ member.department }}</span></td>
+            <td>
+              <div class="performance-bar">
+                <div class="performance-fill" [style.width.%]="member.performance" 
+                     [ngClass]="{'high': member.performance >= 90, 'medium': member.performance >= 80 && member.performance < 90, 'low': member.performance < 80}">
+                </div>
+                <span class="performance-text">{{ member.performance }}%</span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Sales Data Table -->
+    <div class="table-card sales-table-card" *ngIf="salesData.length > 0">
+      <div class="table-header">
+        <h3>💰 Sales Overview</h3>
+        <button class="btn-export">Export</button>
+      </div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Sales</th>
+            <th>Revenue</th>
+            <th>Growth</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let sale of salesData">
+            <td><strong>{{ sale.product }}</strong></td>
+            <td>{{ sale.sales }}</td>
+            <td class="amount">${{ sale.revenue.toLocaleString() }}</td>
+            <td>
+              <span class="growth-badge" [ngClass]="{'positive': sale.growth > 0, 'negative': sale.growth < 0}">
+                <span *ngIf="sale.growth > 0">▲</span>
+                <span *ngIf="sale.growth < 0">▼</span>
+                {{ Math.abs(sale.growth) }}%
+              </span>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr class="total-row">
+            <td><strong>Total</strong></td>
+            <td><strong>{{ getTotalSales() }}</strong></td>
+            <td class="amount"><strong>${{ getTotalRevenue().toLocaleString() }}</strong></td>
+            <td><strong>{{ getAverageGrowth() }}%</strong></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>

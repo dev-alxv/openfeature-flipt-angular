@@ -1,0 +1,628 @@
+.dashboard-home {
+  min-height: 100%;
+}
+
+/* Welcome State */
+.welcome-state {
+  background: white;
+  border-radius: 12px;
+  padding: 4rem 2rem;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.welcome-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+.welcome-state h2 {
+  color: #1e3a5f;
+  margin-bottom: 0.5rem;
+}
+
+.welcome-state p {
+  color: #666;
+}
+
+/* Dashboard Grid */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  grid-auto-rows: min-content;
+}
+
+/* Stats Row */
+.stats-row {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.stat-card {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.stat-card.earning {
+  background: #1e3a5f;
+  color: white;
+}
+
+.stat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.stat-icon-sm {
+  width: 20px;
+  height: 20px;
+}
+
+.stat-icon-sm.share {
+  color: #ff9f43;
+}
+
+.stat-icon-sm.likes {
+  color: #ff9f43;
+}
+
+.stat-icon-sm.rating {
+  color: #ff9f43;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-top: 0.5rem;
+}
+
+/* Chart Card */
+.chart-card {
+  grid-column: 1 / 4;
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.chart-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.chart-header h3 {
+  margin: 0;
+  color: #1e3a5f;
+  font-size: 1.1rem;
+}
+
+.chart-legend {
+  flex: 1;
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.85rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.btn-check {
+  background: #ff9f43;
+  color: white;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-check:hover {
+  background: #ff8c1a;
+  transform: translateY(-2px);
+}
+
+/* Bar Chart */
+.bar-chart {
+  position: relative;
+  height: 200px;
+  display: flex;
+}
+
+.chart-grid {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: #999;
+  padding-right: 0.5rem;
+}
+
+.chart-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+  flex: 1;
+  padding-left: 2rem;
+  height: 100%;
+}
+
+.bar-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  height: 100%;
+  justify-content: flex-end;
+}
+
+.bar {
+  width: 40%;
+  min-height: 5px;
+  border-radius: 4px 4px 0 0;
+  transition: all 0.3s ease;
+  animation: growBar 1s ease-out;
+}
+
+.bar-2019 {
+  background: #1e3a5f;
+}
+
+.bar-2020 {
+  background: #ff9f43;
+}
+
+.bar-group:hover .bar {
+  opacity: 0.8;
+  transform: translateY(-2px);
+}
+
+.bar-label {
+  font-size: 0.7rem;
+  color: #999;
+  margin-top: 0.5rem;
+}
+
+@keyframes growBar {
+  from { height: 0; }
+}
+
+/* Area Chart Card */
+.area-chart-card {
+  grid-column: 1 / 3;
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  position: relative;
+}
+
+.area-legend {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+  font-size: 0.85rem;
+}
+
+.area-chart {
+  width: 100%;
+  height: 150px;
+  margin-bottom: 1rem;
+}
+
+.calendar-widget {
+  position: absolute;
+  right: 1.5rem;
+  top: 4rem;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 0.75rem;
+  font-size: 0.75rem;
+}
+
+.calendar-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #666;
+  text-align: center;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.25rem;
+  text-align: center;
+}
+
+.calendar-grid span {
+  padding: 0.25rem;
+  border-radius: 3px;
+}
+
+.calendar-grid span.highlighted {
+  background: #1e3a5f;
+  color: white;
+  font-weight: bold;
+}
+
+/* Progress Card */
+.progress-card {
+  grid-column: 4 / 5;
+  grid-row: 3 / 5;
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.circular-progress {
+  width: 150px;
+  height: 150px;
+}
+
+.progress-info {
+  text-align: center;
+  color: #666;
+  font-size: 0.85rem;
+}
+
+.progress-info p {
+  margin: 0.25rem 0;
+}
+
+/* Flag Display */
+.flag-display {
+  grid-column: 1 / -1;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  border-radius: 8px;
+  padding: 1.5rem;
+  border: 2px solid #1e3a5f;
+}
+
+.new-feature-alert {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  color: #1e3a5f;
+  font-size: 1.1rem;
+}
+
+.pulse-dot {
+  width: 12px;
+  height: 12px;
+  background: #ff9f43;
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.7;
+  }
+}
+
+/* User Badges */
+.user-badges {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.user-badge {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.user-badge.premium {
+  background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+  color: #333;
+}
+
+.user-badge.enterprise {
+  background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%);
+  color: white;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .stats-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .chart-card {
+    grid-column: 1 / -1;
+  }
+  
+  .area-chart-card {
+    grid-column: 1 / -1;
+  }
+  
+  .progress-card {
+    grid-column: 1 / -1;
+    grid-row: auto;
+  }
+}
+
+/* Table Card */
+.table-card {
+  grid-column: 1 / -1;
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.table-header h3 {
+  margin: 0;
+  color: #1e3a5f;
+  font-size: 1.1rem;
+}
+
+.table-count {
+  background: #f0f0f0;
+  padding: 0.4rem 0.8rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.btn-export {
+  background: #1e3a5f;
+  color: white;
+  border: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-export:hover {
+  background: #2c5282;
+  transform: translateY(-2px);
+}
+
+/* Data Table */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.data-table thead {
+  background: #f8f9fa;
+}
+
+.data-table th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: #1e3a5f;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.data-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.data-table tbody tr {
+  transition: background 0.2s ease;
+}
+
+.data-table tbody tr:hover {
+  background: #f8f9fa;
+}
+
+.data-table code {
+  background: #f0f0f0;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  color: #1e3a5f;
+}
+
+.data-table .amount {
+  font-weight: 600;
+  color: #1e3a5f;
+}
+
+.data-table .status-badge {
+  padding: 0.3rem 0.8rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.data-table .status-badge.completed {
+  background: #d4edda;
+  color: #155724;
+}
+
+.data-table .status-badge.pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.data-table .status-badge.failed {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+/* Department Badge */
+.dept-badge {
+  background: #e0e7ff;
+  color: #1e3a5f;
+  padding: 0.3rem 0.8rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* Performance Bar */
+.performance-bar {
+  position: relative;
+  width: 100%;
+  height: 24px;
+  background: #f0f0f0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.performance-fill {
+  height: 100%;
+  border-radius: 12px;
+  transition: width 1s ease-out;
+  position: relative;
+}
+
+.performance-fill.high {
+  background: linear-gradient(90deg, #28a745 0%, #34ce57 100%);
+}
+
+.performance-fill.medium {
+  background: linear-gradient(90deg, #ff9f43 0%, #ffb366 100%);
+}
+
+.performance-fill.low {
+  background: linear-gradient(90deg, #dc3545 0%, #e74c5c 100%);
+}
+
+.performance-text {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Growth Badge */
+.growth-badge {
+  padding: 0.3rem 0.8rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.growth-badge.positive {
+  background: #d4edda;
+  color: #155724;
+}
+
+.growth-badge.negative {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+/* Total Row */
+.total-row {
+  background: #f8f9fa;
+  font-weight: bold;
+}
+
+.total-row td {
+  border-top: 2px solid #1e3a5f;
+  padding: 1.2rem 1rem;
+}
+
+/* Revenue Chart */
+.revenue-chart {
+  grid-column: 1 / 3;
+}
+
+.line-chart {
+  margin-top: 1.5rem;
+}
+
+.line-chart-svg {
+  width: 100%;
+  height: 200px;
+}
+
+.chart-labels {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: #666;
+  font-weight: 600;
+}
+
+/* Team Table Card */
+.team-table-card {
+  grid-column: 1 / 3;
+}
+
+/* Sales Table Card */
+.sales-table-card {
+  grid-column: 3 / 5;
+}

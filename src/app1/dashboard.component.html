@@ -1,0 +1,48 @@
+
+<main class="grid">
+  <section class="card hero" *booleanFeatureFlag="'showWelcome'; default: false; else: heroOff">
+    <h1>Welcome 👋</h1>
+    <p>Thanks for being a Pro/Enterprise customer.</p>
+  </section>
+  <ng-template #heroOff>
+    <section class="card hero off">
+      <h1>Hello</h1>
+      <p>Upgrade to see our personalized welcome.</p>
+    </section>
+  </ng-template>
+
+  <section class="card banner" *numberFeatureFlag="'discountRate'; value: 20; default: 0; else: otherDiscount">
+    <strong>🔥 20% off</strong> for your organization today!
+  </section>
+  <ng-template #otherDiscount>
+    <section class="card banner alt" *numberFeatureFlag="'discountRate'; value: 10; default: 0; else: noDiscount">
+      <strong>✨ 10% off</strong> for selected clients.
+    </section>
+    <ng-template #noDiscount>
+      <section class="card banner off">No discount available.</section>
+    </ng-template>
+  </ng-template>
+
+  <section class="card" *stringFeatureFlag="'themeVariant'; default: 'light'; let value;">
+    <div [class.dark]="value === 'dark'">
+      <h2>Theme</h2>
+      <p>Active theme: <code>{{ value }}</code></p>
+    </div>
+  </section>
+
+  <section class="card ab" *stringFeatureFlag="'abCard'; value: 'treatment'; default: 'control'; else: abControl">
+    <h2>New Layout (Treatment)</h2>
+    <p>We’re testing a bolder callout.</p>
+  </section>
+  <ng-template #abControl>
+    <section class="card ab control">
+      <h2>Current Layout (Control)</h2>
+      <p>Standard copy and layout.</p>
+    </section>
+  </ng-template>
+
+  <section class="card upsell" *objectFeatureFlag="'upsellPayload'; default: { headline: 'Try Pro', cta: 'Upgrade', color: '#eef' }; let payload;">
+    <h2 [style.color]="payload?.color">{{ payload?.headline }}</h2>
+    <button class="cta">{{ payload?.cta }}</button>
+  </section>
+</main>

@@ -1,0 +1,91 @@
+version: "1.2"
+namespace: default
+
+# Feature Flags Configuration
+# This file is synced to Flipt via GitHub
+# Edit this file and commit to update flags
+
+flags:
+  - key: newHomeUI
+    name: New Home UI
+    type: VARIANT_FLAG_TYPE
+    description: Enable new home page design
+    enabled: true
+    variants:
+      - key: enabled
+        name: Enabled
+      - key: disabled
+        name: Disabled
+    rules:
+      - segment: premium-users
+        distributions:
+          - variant_key: enabled
+            rollout: 100
+      - segment: enterprise-users
+        distributions:
+          - variant_key: enabled
+            rollout: 100
+
+  - key: oldFeatureA
+    name: Old Feature A
+    type: BOOLEAN_FLAG_TYPE
+    description: Legacy feature A (scheduled for deprecation)
+    enabled: false
+
+  - key: oldFeatureB
+    name: Old Feature B
+    type: BOOLEAN_FLAG_TYPE
+    description: Legacy feature B (scheduled for deprecation)
+    enabled: false
+
+  - key: newRevenueChart
+    name: New Revenue Chart
+    type: VARIANT_FLAG_TYPE
+    description: Enable new revenue chart visualization
+    enabled: true
+    variants:
+      - key: enabled
+        name: Enabled
+      - key: disabled
+        name: Disabled
+    rules:
+      - segment: premium-users
+        distributions:
+          - variant_key: enabled
+            rollout: 50
+      - segment: enterprise-users
+        distributions:
+          - variant_key: enabled
+            rollout: 100
+
+# Segments for targeting
+segments:
+  - key: premium-users
+    name: Premium Users
+    description: Users with premium plan
+    match_type: ANY_MATCH_TYPE
+    constraints:
+      - type: STRING_COMPARISON_TYPE
+        property: plan
+        operator: eq
+        value: premium
+
+  - key: enterprise-users
+    name: Enterprise Users
+    description: Users with enterprise plan
+    match_type: ANY_MATCH_TYPE
+    constraints:
+      - type: STRING_COMPARISON_TYPE
+        property: plan
+        operator: eq
+        value: enterprise
+
+  - key: beta-testers
+    name: Beta Testers
+    description: Users in beta testing program
+    match_type: ANY_MATCH_TYPE
+    constraints:
+      - type: STRING_COMPARISON_TYPE
+        property: betaTester
+        operator: eq
+        value: "true"

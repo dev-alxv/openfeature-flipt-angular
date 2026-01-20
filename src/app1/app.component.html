@@ -1,0 +1,17 @@
+
+<header class="toolbar" style="display:flex; gap:12px; align-items:center; padding:12px; background:#0f172a; color:#fff;">
+  <strong>Context</strong>
+  <label>User ID <input [(ngModel)]="userId" /></label>
+  <label>Client ID <input [(ngModel)]="clientId" /></label>
+  <label>Plan
+    <select [(ngModel)]="plan">
+      <option value="free">free</option>
+      <option value="pro">pro</option>
+      <option value="enterprise">enterprise</option>
+    </select>
+  </label>
+  <button (click)="apply()">Apply context</button>
+  <span *ngIf="loading">Updating flags…</span>
+</header>
+
+<app-dashboard></app-dashboard>

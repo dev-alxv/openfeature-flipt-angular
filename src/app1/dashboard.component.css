@@ -1,0 +1,12 @@
+
+.grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); padding: 16px; }
+.card { border-radius: 12px; padding: 16px; box-shadow: 0 4px 16px rgba(0,0,0,.08); background: #fff; }
+.hero { background: linear-gradient(120deg, #e0f7ff, #f9f9ff); }
+.hero.off { opacity: .7 }
+.banner { background: #ffecc7; font-size: 1.1rem; }
+.banner.alt { background: #fff6dc; }
+.banner.off { background: #f6f6f6; color: #999; }
+.ab { background: #f1f5ff }
+.ab.control { background: #f7f7f7 }
+.upsell .cta { margin-top: 8px; padding: 8px 12px; border-radius: 8px; }
+.dark { background: #171717; color: #fafafa; border: 1px solid #333 }

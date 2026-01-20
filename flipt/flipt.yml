@@ -1,0 +1,23 @@
+log:
+  level: debug
+
+server:
+  protocol: http
+  host: 0.0.0.0
+  http_port: 8080
+
+cors:
+  enabled: true
+  allowed_origins:
+    - "http://localhost:4200"
+    - "https://*.githubpreview.dev"
+    - "https://*.app.github.dev"
+
+storage:
+  type: local
+  local:
+    path: /etc/flipt/config
+
+meta:
+  check_for_updates: false
+  telemetry_enabled: false
