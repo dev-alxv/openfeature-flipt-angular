@@ -20,11 +20,11 @@ flags:
       name: oldFeatureB
       type: BOOLEAN_FLAG_TYPE
       enabled: false
-      rules:
+      rollouts:
         - segment:
             keys:
                 - client-2
-          rank: 1
+            operator: OR_SEGMENT_OPERATOR
     - key: oldFeatureA
       name: oldFeatureA
       type: BOOLEAN_FLAG_TYPE
