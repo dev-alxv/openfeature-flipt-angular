@@ -23,24 +23,45 @@ flags:
     type: BOOLEAN_FLAG_TYPE
     description: ""
     enabled: false
+    rules:
+      - rank: 1
+        segment: client-1
+        value: false
+      - rank: 2
+        segment: client-2
+        value: false
 
   - key: oldFeatureB
     name: oldFeatureB
     type: BOOLEAN_FLAG_TYPE
     description: ""
     enabled: false
+    rules:
+      - rank: 1
+        segment: client-2
+        value: false
 
   - key: oldFeatureA
     name: oldFeatureA
     type: BOOLEAN_FLAG_TYPE
     description: ""
     enabled: false
+    metadata:
+      userId: client-1
+    rules:
+      - rank: 1
+        segment: client-1
+        value: true
 
   - key: newRevenueChart
     name: newRevenueChart
     type: BOOLEAN_FLAG_TYPE
     description: ""
     enabled: false
+    rules:
+      - rank: 1
+        segment: client-1
+        value: false
 
 # Segments for targeting
 segments:

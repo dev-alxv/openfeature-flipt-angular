@@ -237,7 +237,7 @@ Last Sync: 1/21/2026, 2:45 PM
 
 ```bash
 # Tail Flipt container logs
-docker logs flipt -f
+docker logs flipt-github -f
 
 # Look for sync messages like:
 # "Git sync completed successfully"
@@ -289,7 +289,7 @@ git diff HEAD~1 flipt/features.yml
 
 **Solution:** Check Flipt logs for details
 ```bash
-docker logs flipt -f | grep -i "error\|sync"
+docker logs flipt-github -f | grep -i "error\|sync"
 ```
 
 ### Issue: Changes Not Reflected After 30 Seconds
@@ -312,11 +312,127 @@ credentials: "github"
 # Ensure GitHub token has read access to repository
 ```
 
+## GitHub Credentials Setup
+
+### 1) Create a GitHub Token (PAT)
+
+Use a fine-grained personal access token with minimal scopes:
+
+- For public repos: only "Contents: Read" is required.
+- For private repos: grant repository access and "Contents: Read".
+
+Steps:
+1. Open https://github.com/settings/personal-access-tokens
+2. Create a Fine-grained token
+3. Repository access: select the repo that stores `flipt/features.yml`
+4. Permissions: Repository permissions → Contents → Read
+5. Copy the generated token (store it securely)
+
+Optional (GitHub CLI): authenticate so Docker/automation can access Git later
+
+```powershell
+# Auth to GitHub (interactive)
+gh auth login
+```
+
+### 2) Provide credentials to Flipt
+
+Flipt is already configured to reference a credential named `github` in `flipt/flipt.yml`. Supply that credential via environment variables or by adding a `credentials` block in the config.
+
+Option A — Environment variables (recommended for containers/CI):
+
+```powershell
+# Set for current shell session
+$env:GIT_USERNAME = "git"
+$env:GITHUB_TOKEN = "<paste-your-token>"
+
+# Persist for your user profile (PowerShell)
+[System.Environment]::SetEnvironmentVariable("GIT_USERNAME", "git", "User")
+[System.Environment]::SetEnvironmentVariable("GITHUB_TOKEN", "<paste-your-token>", "User")
+```
+
+Then start Flipt with these environment variables passed through (example Docker run):
+
+```powershell
+docker run --name flipt-github --rm -p 8080:8080 `
+  -e GIT_USERNAME=$env:GIT_USERNAME `
+  -e GITHUB_TOKEN=$env:GITHUB_TOKEN `
+  -v "${PWD}/flipt/flipt.yml:/etc/flipt/flipt.yml" `
+  -v "${PWD}:/data" `
+  ghcr.io/flipt-io/flipt:latest
+```
+
+Option B — Define credentials in `flipt/flipt.yml`:
+
+```yaml
+credentials:
+  github:
+    type: http
+    http:
+      username: ${GIT_USERNAME}
+      password: ${GITHUB_TOKEN}
+```
+
+Notes:
+- Keep using the `credentials: "github"` reference under `storage.remote.git`.
+- Set `GIT_USERNAME` to any non-empty value (e.g., `git`); `GITHUB_TOKEN` is your PAT.
+- For SSH access, switch `type: ssh` and provide `private_key` instead of HTTP credentials.
+
+### 3) Verify sync works
+
+```powershell
+# Check Flipt logs for sync activity
+docker logs -f flipt
+
+# You should see periodic fetches and apply messages
+```
+
+## Docker Compose Quickstart
+
+Use Docker Compose for a one-command Flipt setup with Git sync credentials.
+
+### 1) Create a `.env` file
+
+Copy the example and set your token (do not commit `.env`):
+
+```powershell
+Copy-Item .env.example .env
+# Edit .env and set your token
+notepad .env
+```
+
+Example contents (see `.env.example`):
+
+```
+GIT_USERNAME=git
+GITHUB_TOKEN=<your-fine-grained-PAT>
+```
+
+### 2) Start Flipt
+
+```powershell
+docker compose up -d
+```
+
+### 3) Verify
+
+```powershell
+docker compose logs -f flipt-github
+```
+
+You should see periodic sync attempts to the configured repository.
+
+### 4) Stop
+
+```powershell
+docker compose down
+```
+
 ## Next Steps
 
 1. **Set up GitHub Integration**
-   - Create a GitHub token
-   - Configure in Flipt credentials
+   - Create a GitHub token (done above)
+   - Configure in Flipt credentials (done above)
 
 2. **Create Feature Flag Repository**
    - Clone example repository
