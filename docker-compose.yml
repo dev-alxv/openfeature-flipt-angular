@@ -3,7 +3,7 @@ services:
   flipt-github:
     image: ghcr.io/flipt-io/flipt:latest
     container_name: flipt-github
-    command: ["--config", "/etc/flipt/config/flipt.yml"]
+    command: ["flipt", "--config", "/etc/flipt/config/flipt.yml"]
     ports:
       - "8080:8080"
     environment:
