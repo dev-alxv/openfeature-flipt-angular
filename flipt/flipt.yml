@@ -17,15 +17,9 @@ storage:
   # Load flags from mounted config directory (docker-compose mounts ./flipt -> /etc/flipt/config)
   type: local
   local:
-    path: /etc/flipt/config
-
-credentials:
-  github:
-    type: http
-    http:
-      username: ${GIT_USERNAME}
-      password: ${GITHUB_TOKEN}
+    directory: /etc/flipt/config
 
 meta:
   check_for_updates: false
   telemetry_enabled: false
+
