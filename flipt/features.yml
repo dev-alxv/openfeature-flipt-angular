@@ -26,7 +26,7 @@ flags:
     rules:
       - rank: 1
         segment: client-1
-        value: false
+        value: true
       - rank: 2
         segment: client-2
         value: false
