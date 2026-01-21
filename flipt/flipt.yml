@@ -22,12 +22,19 @@ storage:
     type: git
     git:
       repository: "https://github.com/dev-alxv/openfeature-flipt-angular.git"
-      branch: "main"
+      branch: "master"
       poll_interval: "30s"
       fetch_policy: "strict"
       credentials: "github"
       backend:
         type: memory
+
+credentials:
+  github:
+    type: http
+    http:
+      username: ${GIT_USERNAME}
+      password: ${GITHUB_TOKEN}
 
 meta:
   check_for_updates: false

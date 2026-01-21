@@ -6,7 +6,7 @@ namespace: default
 # 
 # Git Sync Configuration:
 # - Repository: https://github.com/dev-alxv/openfeature-flipt-angular.git
-# - Branch: main
+# - Branch: master
 # - Poll Interval: 30s (checks for changes every 30 seconds)
 # - Fetch Policy: strict (validates all changes before applying)
 # - Storage Backend: in-memory with remote git sync
