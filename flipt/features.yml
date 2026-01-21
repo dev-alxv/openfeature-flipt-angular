@@ -29,7 +29,7 @@ flags:
         value: true
       - rank: 2
         segment: client-2
-        value: false
+        value: true
 
   - key: oldFeatureB
     name: oldFeatureB
