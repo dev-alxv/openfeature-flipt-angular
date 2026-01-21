@@ -14,20 +14,14 @@ cors:
     - "https://*.app.github.dev"
 
 storage:
-  # Primary in-memory storage that syncs with remote git repository
-  type: memory
-  
-  # Git-based remote storage backend (staging environment)
-  remote:
-    type: git
-    git:
-      repository: "https://github.com/dev-alxv/openfeature-flipt-angular.git"
-      branch: "master"
-      poll_interval: "30s"
-      fetch_policy: "strict"
-      credentials: "github"
-      backend:
-        type: memory
+  # Git-backed declarative storage
+  type: git
+  git:
+    repository: "https://github.com/dev-alxv/openfeature-flipt-angular.git"
+    branch: "master"
+    poll_interval: "30s"
+    fetch_policy: "strict"
+    credentials: "github"
 
 credentials:
   github:
