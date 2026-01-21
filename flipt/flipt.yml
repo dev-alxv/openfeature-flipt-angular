@@ -22,3 +22,24 @@ meta:
   telemetry_enabled: false
 
 
+storage:
+  staging:
+    remote: "https://github.com/dev-alxv/openfeature-flipt-angular.git"
+    branch: "master"
+    poll_interval: "30s"
+    fetch_policy: "strict"
+    credentials: "github"
+    backend:
+      type: local
+      path: "/tmp/flipt-storage-staging"
+
+credentials:
+  github:
+    type: access_token
+    access_token: "${GITHUB_ACCESS_TOKEN}"
+
+environments:
+  staging:
+    name: "Staging"
+    storage: "staging"
+    directory: "staging"
