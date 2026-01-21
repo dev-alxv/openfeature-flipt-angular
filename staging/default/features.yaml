@@ -31,11 +31,12 @@ flags:
       enabled: false
       metadata:
         userId: client-1
-      rules:
+      rollouts:
         - segment:
             keys:
                 - client-1
-          rank: 1
+            operator: OR_SEGMENT_OPERATOR
+            value: true
     - key: newRevenueChart
       name: newRevenueChart
       type: BOOLEAN_FLAG_TYPE
