@@ -3,11 +3,69 @@ namespace:
     key: default
     name: Default
 flags:
-    - key: test-github-connection
-      name: Test-github-connection
-      type: BOOLEAN_FLAG_TYPE
-      enabled: false
-    - key: test2
-      name: test2
-      type: BOOLEAN_FLAG_TYPE
-      enabled: false
+  - key: newHomeUI
+    name: newHomeUI
+    type: BOOLEAN_FLAG_TYPE
+    description: ""
+    enabled: false
+    rules:
+      - rank: 1
+        segment: client-1
+        value: true
+      - rank: 2
+        segment: client-2
+        value: true
+
+  - key: oldFeatureB
+    name: oldFeatureB
+    type: BOOLEAN_FLAG_TYPE
+    description: ""
+    enabled: false
+    rules:
+      - rank: 1
+        segment: client-2
+        value: false
+
+  - key: oldFeatureA
+    name: oldFeatureA
+    type: BOOLEAN_FLAG_TYPE
+    description: ""
+    enabled: false
+    metadata:
+      userId: client-1
+    rules:
+      - rank: 1
+        segment: client-1
+        value: true
+
+  - key: newRevenueChart
+    name: newRevenueChart
+    type: BOOLEAN_FLAG_TYPE
+    description: ""
+    enabled: false
+    rules:
+      - rank: 1
+        segment: client-1
+        value: false
+
+# Segments for targeting
+segments:
+  - key: client-1
+    name: client-1
+    description: ""
+    match_type: ALL_MATCH_TYPE
+    constraints:
+      - type: STRING_COMPARISON_TYPE
+        property: entityId
+        operator: eq
+        value: client-1
+
+  - key: client-2
+    name: client-2
+    description: ""
+    match_type: ALL_MATCH_TYPE
+    constraints:
+      - type: STRING_COMPARISON_TYPE
+        property: entityId
+        operator: eq
+        value: client-2
