@@ -1,0 +1,9 @@
+version: "1.5"
+namespace:
+    key: default
+    name: Default
+flags:
+    - key: test-github-connection
+      name: Test-github-connection
+      type: BOOLEAN_FLAG_TYPE
+      enabled: false
