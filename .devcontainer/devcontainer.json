@@ -5,6 +5,9 @@
   "workspaceFolder": "/workspace",
   
   "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "version": "latest"
+    },
     "ghcr.io/devcontainers/features/node:1": {
       "version": "18"
     },
