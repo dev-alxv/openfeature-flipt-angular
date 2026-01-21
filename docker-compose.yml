@@ -27,6 +27,7 @@ services:
       - GIT_USERNAME=${GIT_USERNAME}
       - GITHUB_TOKEN=${GITHUB_TOKEN}
       - FLIPT_DB_URL=postgres://flipt:flipt@postgres:5432/flipt?sslmode=disable
+      - FLIPT_CONFIG=/etc/flipt/config.yml
     volumes:
       - ./flipt/flipt.yml:/etc/flipt/config.yml:ro
     restart: unless-stopped
