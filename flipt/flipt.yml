@@ -14,9 +14,20 @@ cors:
     - "https://*.app.github.dev"
 
 storage:
-  type: local
-  local:
-    path: /etc/flipt/config
+  # Primary in-memory storage that syncs with remote git repository
+  type: memory
+  
+  # Git-based remote storage backend (staging environment)
+  remote:
+    type: git
+    git:
+      repository: "https://github.com/dev-alxv/openfeature-flipt-angular.git"
+      branch: "main"
+      poll_interval: "30s"
+      fetch_policy: "strict"
+      credentials: "github"
+      backend:
+        type: memory
 
 meta:
   check_for_updates: false

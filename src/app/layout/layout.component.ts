@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { ContextSwitcherComponent } from '../shared/context-switcher/context-switcher.component';
+import { GitSyncStatusComponent } from '../shared/git-sync-status/git-sync-status.component';
 import { ContextService } from '../shared/context.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { ContextService } from '../shared/context.service';
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.css'],
   standalone:true,
-  imports:[CommonModule, RouterLink, RouterLinkActive, RouterOutlet, ContextSwitcherComponent]
+  imports:[CommonModule, RouterLink, RouterLinkActive, RouterOutlet, ContextSwitcherComponent, GitSyncStatusComponent]
 })
 export class LayoutComponent {
   currentUser$ = this.contextService.context$;
