@@ -14,14 +14,10 @@ cors:
     - "https://*.app.github.dev"
 
 storage:
-  # Git-backed declarative storage
-  type: git
-  git:
-    repository: "https://github.com/dev-alxv/openfeature-flipt-angular.git"
-    branch: "master"
-    poll_interval: "30s"
-    fetch_policy: "strict"
-    credentials: "github"
+  # Load flags from mounted config directory (docker-compose mounts ./flipt -> /etc/flipt/config)
+  type: local
+  local:
+    path: /etc/flipt/config
 
 credentials:
   github:
