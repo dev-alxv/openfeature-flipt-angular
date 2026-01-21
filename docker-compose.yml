@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   flipt-github:
-    image: ghcr.io/flipt-io/flipt:latest
+    image: ghcr.io/flipt-io/flipt:v2.5.0
     container_name: flipt-github
     command: ["/flipt", "--config", "/etc/flipt/config/flipt.yml"]
     ports:
