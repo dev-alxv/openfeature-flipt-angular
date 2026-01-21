@@ -7,3 +7,7 @@ flags:
       name: Test-github-connection
       type: BOOLEAN_FLAG_TYPE
       enabled: false
+    - key: test2
+      name: test2
+      type: BOOLEAN_FLAG_TYPE
+      enabled: false
