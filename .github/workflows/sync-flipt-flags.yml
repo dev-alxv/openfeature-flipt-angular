@@ -55,7 +55,7 @@ jobs:
 
       - name: Create flags via API
         run: |
-          FLIPT_URL="${{ secrets.FLIPT_DEV_URL }}"
+          FLIPT_URL="http://localhost:8080"
           echo "🚀 Syncing flags to Flipt Development ($FLIPT_URL)..."
           
           # Extract flags and create them
@@ -74,7 +74,7 @@ jobs:
 
       - name: Create segments via API
         run: |
-          FLIPT_URL="${{ secrets.FLIPT_DEV_URL }}"
+          FLIPT_URL="http://localhost:8080"
           echo "📍 Syncing segments to Flipt Development..."
           
           # Extract segments and create them
@@ -108,13 +108,13 @@ jobs:
       - name: Create backup
         run: |
           echo "📦 Creating backup of current flags..."
-          FLIPT_URL="${{ secrets.FLIPT_PROD_URL }}"
+          FLIPT_URL="http://localhost:8080"
           curl -s "$FLIPT_URL/api/v1/namespaces/default/flags" \
             -o backup-$(date +%Y%m%d-%H%M%S).json 2>/dev/null || echo "⚠️ Backup skipped"
 
       - name: Create flags via API
         run: |
-          FLIPT_URL="${{ secrets.FLIPT_PROD_URL }}"
+          FLIPT_URL="http://localhost:8080"
           echo "🚀 Syncing flags to Flipt Production ($FLIPT_URL)..."
           
           # Extract flags and create them
@@ -133,7 +133,7 @@ jobs:
 
       - name: Create segments via API
         run: |
-          FLIPT_URL="${{ secrets.FLIPT_PROD_URL }}"
+          FLIPT_URL="http://localhost:8080"
           echo "📍 Syncing segments to Flipt Production..."
           
           # Extract segments and create them
