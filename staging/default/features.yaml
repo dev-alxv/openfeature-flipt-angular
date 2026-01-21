@@ -3,69 +3,63 @@ namespace:
     key: default
     name: Default
 flags:
-  - key: newHomeUI
-    name: newHomeUI
-    type: BOOLEAN_FLAG_TYPE
-    description: ""
-    enabled: false
-    rules:
-      - rank: 1
-        segment: client-1
-        value: true
-      - rank: 2
-        segment: client-2
-        value: true
-
-  - key: oldFeatureB
-    name: oldFeatureB
-    type: BOOLEAN_FLAG_TYPE
-    description: ""
-    enabled: false
-    rules:
-      - rank: 1
-        segment: client-2
-        value: false
-
-  - key: oldFeatureA
-    name: oldFeatureA
-    type: BOOLEAN_FLAG_TYPE
-    description: ""
-    enabled: false
-    metadata:
-      userId: client-1
-    rules:
-      - rank: 1
-        segment: client-1
-        value: true
-
-  - key: newRevenueChart
-    name: newRevenueChart
-    type: BOOLEAN_FLAG_TYPE
-    description: ""
-    enabled: false
-    rules:
-      - rank: 1
-        segment: client-1
-        value: false
-
-# Segments for targeting
+    - key: newHomeUI
+      name: newHomeUI
+      type: BOOLEAN_FLAG_TYPE
+      enabled: false
+      rollouts:
+        - segment:
+            keys:
+                - client-1
+            operator: OR_SEGMENT_OPERATOR
+            value: true
+        - segment:
+            keys:
+                - client-2
+            operator: OR_SEGMENT_OPERATOR
+    - key: oldFeatureB
+      name: oldFeatureB
+      type: BOOLEAN_FLAG_TYPE
+      enabled: false
+      rules:
+        - segment:
+            keys:
+                - client-2
+          rank: 1
+    - key: oldFeatureA
+      name: oldFeatureA
+      type: BOOLEAN_FLAG_TYPE
+      enabled: false
+      metadata:
+        userId: client-1
+      rules:
+        - segment:
+            keys:
+                - client-1
+          rank: 1
+    - key: newRevenueChart
+      name: newRevenueChart
+      type: BOOLEAN_FLAG_TYPE
+      enabled: false
+      rules:
+        - segment:
+            keys:
+                - client-1
+          rank: 1
 segments:
-  - key: client-1
-    name: client-1
-    description: ""
-    match_type: ALL_MATCH_TYPE
-    constraints:
-      - type: STRING_COMPARISON_TYPE
-        property: entityId
-        operator: eq
-        value: client-1
-
-  - key: client-2
-    name: client-2
-    description: ""
-    match_type: ALL_MATCH_TYPE
-    constraints:
-      - type: STRING_COMPARISON_TYPE
-        property: entityId
-        operator: eq
-        value: client-2
+    - key: client-1
+      name: client-1
+      constraints:
+        - type: STRING_COMPARISON_TYPE
+          property: entityId
+          operator: eq
+          value: client-1
+      match_type: ALL_MATCH_TYPE
+    - key: client-2
+      name: client-2
+      constraints:
+        - type: STRING_COMPARISON_TYPE
+          property: entityId
+          operator: eq
+          value: client-2
+      match_type: ALL_MATCH_TYPE
