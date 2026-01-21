@@ -12,7 +12,6 @@ flags:
             keys:
                 - client-1
             operator: OR_SEGMENT_OPERATOR
-            value: true
         - segment:
             keys:
                 - client-2
