@@ -1,14 +1,35 @@
 version: "3.8"
 services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: flipt-postgres
+    environment:
+      POSTGRES_DB: flipt
+      POSTGRES_USER: flipt
+      POSTGRES_PASSWORD: flipt
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U flipt"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   flipt-github:
     image: ghcr.io/flipt-io/flipt:v2.5.0
     container_name: flipt-github
-    working_dir: /etc/flipt/config
+    depends_on:
+      postgres:
+        condition: service_healthy
     ports:
       - "8080:8080"
     environment:
       - GIT_USERNAME=${GIT_USERNAME}
       - GITHUB_TOKEN=${GITHUB_TOKEN}
+      - FLIPT_DB_URL=postgres://flipt:flipt@postgres:5432/flipt?sslmode=disable
     volumes:
-      - ./flipt:/etc/flipt/config:ro
+      - ./flipt/flipt.yml:/etc/flipt/config.yml:ro
     restart: unless-stopped
+
+volumes:
+  postgres-data:

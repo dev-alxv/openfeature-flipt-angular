@@ -1,10 +1,14 @@
 log:
   level: debug
 
-server:
-  protocol: http
-  host: 0.0.0.0
-  http_port: 8080
+http:
+  addr: ":8080"
+
+grpc:
+  addr: ":9000"
+
+db:
+  type: postgres
 
 cors:
   enabled: true
@@ -13,13 +17,8 @@ cors:
     - "https://*.githubpreview.dev"
     - "https://*.app.github.dev"
 
-storage:
-  # Load flags from mounted config directory (docker-compose mounts ./flipt -> /etc/flipt/config)
-  type: local
-  local:
-    directory: /etc/flipt/config
-
 meta:
   check_for_updates: false
   telemetry_enabled: false
+
 
