@@ -6,7 +6,7 @@ flags:
     - key: newHomeUI
       name: newHomeUI
       type: BOOLEAN_FLAG_TYPE
-      enabled: false
+      enabled: true
       rollouts:
         - segment:
             keys:
